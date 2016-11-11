@@ -87,6 +87,7 @@ unsigned int CAP_EUID;
 unsigned int CAP_EOPMOD;
 unsigned int CAP_BAN;
 unsigned int CAP_MLOCK;
+unsigned int CAP_MIGR;
 
 unsigned int CLICAP_MULTI_PREFIX;
 unsigned int CLICAP_ACCOUNT_NOTIFY;
@@ -96,6 +97,7 @@ unsigned int CLICAP_USERHOST_IN_NAMES;
 unsigned int CLICAP_CAP_NOTIFY;
 unsigned int CLICAP_CHGHOST;
 unsigned int CLICAP_ECHO_MESSAGE;
+unsigned int CLICAP_MIGRATE;
 
 /*
  * initialize our builtin capability table. --nenolod
@@ -127,11 +129,13 @@ init_builtin_capabs(void)
 	CAP_EOPMOD = capability_put(serv_capindex, "EOPMOD", NULL);
 	CAP_BAN = capability_put(serv_capindex, "BAN", NULL);
 	CAP_MLOCK = capability_put(serv_capindex, "MLOCK", NULL);
+	CAP_MIGR = capability_put(serv_capindex, "MIGR", NULL);
 
 	capability_require(serv_capindex, "QS");
 	capability_require(serv_capindex, "EX");
 	capability_require(serv_capindex, "IE");
 	capability_require(serv_capindex, "ENCAP");
+	capability_require(serv_capindex, "MIGR");
 
 	cli_capindex = capability_index_create("client capabilities");
 
@@ -143,6 +147,7 @@ init_builtin_capabs(void)
 	CLICAP_CAP_NOTIFY = capability_put(cli_capindex, "cap-notify", NULL);
 	CLICAP_CHGHOST = capability_put(cli_capindex, "chghost", NULL);
 	CLICAP_ECHO_MESSAGE = capability_put(cli_capindex, "echo-message", NULL);
+	CLICAP_MIGRATE = capability_put(cli_capindex, "migrate", NULL);
 }
 
 static CNCB serv_connect_callback;
