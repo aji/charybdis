@@ -67,6 +67,7 @@ struct PreClient;
 struct ListClient;
 struct scache_entry;
 struct ws_ctl;
+struct Migration;
 
 typedef int SSL_OPEN_CB(struct Client *, int status);
 
@@ -160,6 +161,8 @@ struct Client
 
 	struct LocalUser *localClient;
 	struct PreClient *preClient;
+
+	struct Migration *migration;
 
 	time_t large_ctcp_sent; /* ctcp to large group sent, relax flood checks */
 	char *certfp; /* client certificate fingerprint */
